@@ -11,8 +11,8 @@ The initial concept was sketched out on paper as a simple storyboard:
 The key features are as follows:
 - A map API to show users their current location (location services must be enabled)
 - A filter function to show:
--   Approximate heights of buildings and highlight built-up areas
--   
+  -  Approximate heights of buildings and highlight built-up areas
+  -  
 
 
 ## Installation
