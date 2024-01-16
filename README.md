@@ -12,7 +12,9 @@ The key features are as follows:
 - A map API to show users their current location (location services must be enabled)
 - A filter function to show:
   -  Approximate heights of buildings and highlight built-up areas
-  -  
+  -  Local weather patterns
+  -  Sun vectors throughout the day
+-  A routing function to show the way to the nearest sunny spots
 
 
 ## Installation
