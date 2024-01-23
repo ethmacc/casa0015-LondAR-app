@@ -12,6 +12,8 @@ This was then developed into a more fleshed out Figma prototype:
 
 ![image](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/6586c254-5037-4df5-acb4-a276b0000cbe)
 
+*Sun and running man icons were sourced from the Noun Project (https://thenounproject.com/)
+
 The key features are as follows:
 - A map API to show users their current location (location services must be enabled)
 - A filter function to show:
