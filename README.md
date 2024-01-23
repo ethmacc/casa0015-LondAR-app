@@ -8,6 +8,10 @@ The initial concept was sketched out on paper as a simple storyboard:
 
 ![scan0069](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/97da23a4-e51b-45ef-8e2a-7ab5795c61c7)
 
+This was then developed into a more fleshed out Figma prototype:
+
+![image](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/6586c254-5037-4df5-acb4-a276b0000cbe)
+
 The key features are as follows:
 - A map API to show users their current location (location services must be enabled)
 - A filter function to show:
@@ -15,6 +19,7 @@ The key features are as follows:
   -  Local weather patterns
   -  Sun vectors throughout the day
 -  A routing function to show the way to the nearest sunny spots
+-  A solar bracelet / heliodon function to show the current sun position relative to the user
 
 
 ## Installation
