@@ -8,11 +8,21 @@ The initial concept was sketched out on paper as a simple storyboard:
 
 ![scan0069](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/97da23a4-e51b-45ef-8e2a-7ab5795c61c7)
 
-This was then developed into a more fleshed out Figma storyboard:
+This was then developed into a more fleshed out Figma wireframe:
 
-![image](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/6586c254-5037-4df5-acb4-a276b0000cbe)
+![Mobile Wireframe UI Kit (Community)](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/c183c53b-f3ae-4a65-a7dc-910b79f33eb5)
 
 *Sun and running man icons were sourced from the Noun Project (https://thenounproject.com/)
+
+User personas were also developed to assist in understanding user's needs and aspirations:
+
+![Slide6](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/756d1ebb-a81d-4a12-82cb-b56186ecc7d3)
+
+![Slide7](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/c6a959f9-9b17-48e9-89ab-3ab03d8daff5)
+
+![Slide8](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/54d846a8-0e83-426b-9cec-ef0e01094ab6)
+
+## Key features
 
 The key features are as follows:
 - A map API to show users their current location (location services must be enabled)
