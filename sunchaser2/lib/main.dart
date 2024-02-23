@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   text: 'Sun Finder'
                 ),
                 Tab(
-                  text: 'Heliodon'
+                  text: 'Heliodon',
                 )
               ],
               )
@@ -119,6 +119,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     color:Colors.white,
                     height:  MediaQuery.of(context).size.height / 2.5,
+                    child: Center(
+                      child: TextButton(
+                        onPressed: () {  }, 
+                        child: Text('Find nearest sun'),
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.orange,
+                          ),
+                        )
+                      ),
                     ),
                   Container(
                     color: Colors.blue,
