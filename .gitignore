@@ -1,5 +1,6 @@
 # venv
 backend_venv/
+venv/
 
 #jupyter notebook
 .ipynb_checkpoints
