@@ -25,6 +25,7 @@ dependencies:
   flutter_map_location_marker: ^8.0.5
   firebase_core: ^2.27.0
   cloud_functions: ^4.6.8
+  geolocator: ^11.0.0
 
 
 dev_dependencies:

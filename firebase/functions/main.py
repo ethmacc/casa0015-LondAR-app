@@ -84,7 +84,6 @@ def calcParkShading(req: https_fn.Request) -> https_fn.Response:
     parks_tags = parks.tags.apply(pd.Series)
     parks_concat = pd.concat([parks_tags.name, sunny_perc], axis=1)
     top3 = parks_concat.sort_values(by=[0], ascending=False).head(3)
-
     return {'park1':top3.iloc[0,0],
             'park2':top3.iloc[1,0],
             'park3':top3.iloc[2,0],
