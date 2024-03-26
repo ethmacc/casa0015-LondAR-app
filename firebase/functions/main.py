@@ -6,23 +6,24 @@ import osm2geojson
 import pybdshadow
 import pandas as pd
 import numpy as np
+import json
 
 from firebase_functions import https_fn
 from firebase_admin import initialize_app
 
 initialize_app()
 
-@https_fn.on_request()
+@https_fn.on_call()
 def calcParkShading(req: https_fn.Request) -> https_fn.Response:
     """Take the coordinate and datetime values passed to this parameter and return a list of the top 3 sunniest parks within  a box of approx 1km by 1km"""
-    # Grab the text parameter.
-    lat = float(req.args.get("lat"))
-    long = float(req.args.get("long"))
+    #query = json.loads(req.data)
+    lat = float(req.data["lat"])
+    long = float(req.data["long"])
     if lat is None or long is None:
         return https_fn.Response("One or more coordinate parameters are missing", status=400)
         
-    date = str(req.args.get("dateStr"))
-    time = str(req.args.get("timeStr"))
+    date = str(req.data["dateStr"])
+    time = str(req.data["timeStr"])
     if date is None or time is None:
         return https_fn.Response("One or more datetime parameters are missing", status=400)
 
@@ -61,7 +62,9 @@ def calcParkShading(req: https_fn.Request) -> https_fn.Response:
     else:
         approx_ht = round(levels.astype(int) * 128/36)
 
-    geojsonDF['height'] = approx_ht.astype(int)
+    geojsonDF['height'] = approx_ht.astype(str)
+    geojsonDF['height'] = geojsonDF['height'].str.extract('(\d+)', expand=False)
+    geojsonDF['height'] = geojsonDF['height'].astype(int)
     geojsonDF['leisure'] = temp.leisure
     geojsonDF.loc[geojsonDF['leisure'] == 'park', 'height'] = 0
     parks = geojsonDF.loc[geojsonDF['leisure'] == 'park']
@@ -91,5 +94,3 @@ def calcParkShading(req: https_fn.Request) -> https_fn.Response:
             'park2_perc':top3.iloc[0,1],
             'park3_perc':top3.iloc[0,1],
            }
-
-
