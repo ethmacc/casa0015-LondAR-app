@@ -39,12 +39,18 @@ Future<Object> getParks() async {
   final formattedTime = timeFormatter.format(datetimeNow);
 
   //Additional code to run cloud function 
+  print ({
+      "lat": position.latitude,
+      "long": position.longitude,
+      "dateStr": formattedDate,
+      "timeStr": '17:30:00', 
+    });
   final result = await FirebaseFunctions.instance.httpsCallable('calcParkShading').call(
     {
       "lat": position.latitude,
       "long": position.longitude,
       "dateStr": formattedDate,
-      "timeStr": '12:30:00', 
+      "timeStr": '17:30:00', 
     },
   );
   return result.data;

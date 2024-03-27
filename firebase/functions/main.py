@@ -6,7 +6,6 @@ import osm2geojson
 import pybdshadow
 import pandas as pd
 import numpy as np
-import json
 
 from firebase_functions import https_fn
 from firebase_admin import initialize_app
@@ -87,9 +86,26 @@ def calcParkShading(req: https_fn.Request) -> https_fn.Response:
     parks_tags = parks.tags.apply(pd.Series)
     parks_concat = pd.concat([parks_tags.name, sunny_perc], axis=1)
     top3 = parks_concat.sort_values(by=[0], ascending=False).head(3)
-    return {'park1':top3.iloc[0,0],
-            'park2':top3.iloc[1,0],
-            'park3':top3.iloc[2,0],
+
+    def replaceNaN(input):
+        if input is not np.nan:
+            return input
+        else:
+            return 'Unnamed'
+
+    park1name = replaceNaN(top3.iloc[0,0])
+    park2name = replaceNaN(top3.iloc[1,0])
+    park3name = replaceNaN(top3.iloc[2,0])
+    print ({'park1':park1name,
+            'park2':park2name,
+            'park3':park3name,
+            'park1_perc':top3.iloc[0,1],
+            'park2_perc':top3.iloc[0,1],
+            'park3_perc':top3.iloc[0,1],
+           })
+    return {'park1':park1name,
+            'park2':park2name,
+            'park3':park3name,
             'park1_perc':top3.iloc[0,1],
             'park2_perc':top3.iloc[0,1],
             'park3_perc':top3.iloc[0,1],

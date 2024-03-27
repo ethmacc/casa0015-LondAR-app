@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
-import 'sun_finder.dart';
+import 'package:sunchaser2/parksList.dart';
+import 'SunFinderStart.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+class HomePage extends StatelessWidget {
+  const HomePage({super.key, required this.loaded, required this.queryResult});
+  final bool loaded;
+  final Map<String, dynamic> queryResult;
 
-  @override
+  @override @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(title),
+          title: const Text('Sunchaser'),
         ),
         body: Column(children: <Widget>[
           SizedBox(
@@ -58,7 +60,7 @@ class MyHomePage extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  SunFinder(),
+                  !loaded ? const SunFinder() : ParksList(queryResult: queryResult,),
                   Container(
                     color: Colors.blue,
                     height:  MediaQuery.of(context).size.height / 2.5,
