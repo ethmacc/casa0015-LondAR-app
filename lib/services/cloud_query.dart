@@ -1,4 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
@@ -38,20 +39,26 @@ Future<Object> getParks() async {
   final formattedDate = dateFormatter.format(datetimeNow);
   final formattedTime = timeFormatter.format(datetimeNow);
 
-  //Additional code to run cloud function 
-  print ({
-      "lat": position.latitude,
-      "long": position.longitude,
-      "dateStr": formattedDate,
-      "timeStr": '17:30:00', 
-    });
-  final result = await FirebaseFunctions.instance.httpsCallable('calcParkShading').call(
-    {
-      "lat": position.latitude,
-      "long": position.longitude,
-      "dateStr": formattedDate,
-      "timeStr": '17:30:00', 
-    },
-  );
-  return result.data;
+  try {
+    final result = await FirebaseFunctions.instance.httpsCallable('calcParkShading').call(
+      {
+        "lat": position.latitude,
+        "long": position.longitude,
+        "dateStr": formattedDate,
+        "timeStr": '18:00:00', 
+      },
+    );
+    return result.data;
+  } on FirebaseFunctionsException catch (error) {
+    print(error.code);
+    print(error.details);
+    print(error.message);
+    print({
+        "lat": position.latitude,
+        "long": position.longitude,
+        "dateStr": formattedDate,
+        "timeStr": '18:00:00', 
+      });
+    return 'FunctionError';
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'cloud_query.dart';
-import 'home.dart';
+import '../services/cloud_query.dart';
+import '../screens/home.dart';
+import '../screens/error.dart';
 
 class SunFinder extends StatefulWidget {
   const SunFinder({super.key});
@@ -29,22 +30,28 @@ class _SunFinderState extends State<SunFinder> {
         onPressed: () async {
           setState(() => isLoading = true);
           queryResult = await getParks();
-          print(queryResult['park1_perc'].floor().toString());
+          print(queryResult);
           setState(() => isLoading = false);
           if (!context.mounted) return;
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage(loaded: true, queryResult: queryResult))
-            );
-        },
-        style: TextButton.styleFrom(
-          backgroundColor: Colors.orange,
+            if (queryResult is Map<String, dynamic>) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage(loaded: true, queryResult : queryResult))
+              ); 
+            }
+            else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ErrorPage())
+              ); 
+            }
+          },
+          style: TextButton.styleFrom(
+          backgroundColor: Colors.amber[600],
           ), 
         child: const Text('Find nearest sun'),
       ),
     );
   }
-
-
 }
 

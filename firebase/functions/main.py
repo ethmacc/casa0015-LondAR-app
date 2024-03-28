@@ -54,7 +54,8 @@ def calcParkShading(req: https_fn.Request) -> https_fn.Response:
     if 'building:levels' not in temp.columns:
         temp['building:levels'] = np.nan
     
-    levels = temp['building:levels'].fillna(1)
+    levels = temp['building:levels'].fillna(1).astype(str)
+    levels = levels.str.extract('(\d+)', expand=False)
 
     if 'height' in temp.columns:
         approx_ht = temp.height.fillna(round(levels.astype(int) * 128/36))
@@ -84,29 +85,11 @@ def calcParkShading(req: https_fn.Request) -> https_fn.Response:
 
     #Link with park names and return
     parks_tags = parks.tags.apply(pd.Series)
-    parks_concat = pd.concat([parks_tags.name, sunny_perc], axis=1)
-    top3 = parks_concat.sort_values(by=[0], ascending=False).head(3)
-
-    def replaceNaN(input):
-        if input is not np.nan:
-            return input
-        else:
-            return 'Unnamed'
-
-    park1name = replaceNaN(top3.iloc[0,0])
-    park2name = replaceNaN(top3.iloc[1,0])
-    park3name = replaceNaN(top3.iloc[2,0])
-    print ({'park1':park1name,
-            'park2':park2name,
-            'park3':park3name,
-            'park1_perc':top3.iloc[0,1],
-            'park2_perc':top3.iloc[0,1],
-            'park3_perc':top3.iloc[0,1],
-           })
-    return {'park1':park1name,
-            'park2':park2name,
-            'park3':park3name,
-            'park1_perc':top3.iloc[0,1],
-            'park2_perc':top3.iloc[0,1],
-            'park3_perc':top3.iloc[0,1],
-           }
+    parks_concat = pd.concat([parks_tags.name, sunny_perc, parks.centroid.get_coordinates()], axis=1)
+    top3 = parks_concat.sort_values(by=[0], ascending=False).head(5)
+    top3 = top3.rename(columns={0:'perc', 'x':'long', 'y':'lat'}).reset_index(drop=True)
+    top3.name = top3.name.fillna('Unnamed')
+    return_dict = top3.to_dict('index')
+    
+    print (return_dict)
+    return return_dict

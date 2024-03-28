@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
-import 'package:sunchaser2/parksList.dart';
-import 'SunFinderStart.dart';
+import 'package:latlong2/latlong.dart';
+import '../widgets/ParksList.dart';
+import '../widgets/SunFinderStart.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key, required this.loaded, required this.queryResult});
   final bool loaded;
   final Map<String, dynamic> queryResult;
 
-  @override @override
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
@@ -25,7 +26,7 @@ class HomePage extends StatelessWidget {
               options: const MapOptions(
                 minZoom: 8,
                 maxZoom: 18,
-                initialZoom: 13,
+                initialZoom: 14.5,
               ),
               children: [
                 TileLayer(
@@ -40,6 +41,18 @@ class HomePage extends StatelessWidget {
                 CurrentLocationLayer(
                   alignPositionOnUpdate: AlignOnUpdate.always,
                 ),
+                MarkerLayer(
+                  markers: [
+                    for (var row in queryResult.keys)
+                      Marker(
+                          point: LatLng(queryResult[row]['lat'], queryResult[row]['long']),
+                          child: const Icon(
+                            Icons.location_on,
+                            color:Colors.red,
+                            )
+                          )
+                    ]
+                  )
               ],
               )
           ),
