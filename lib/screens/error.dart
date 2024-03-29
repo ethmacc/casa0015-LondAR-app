@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ErrorPage extends StatelessWidget {
-  const ErrorPage({super.key});
+  const ErrorPage({super.key, required this.errorMessage});
+  final String errorMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +11,7 @@ class ErrorPage extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: const Text('Sunchaser'),
         ),
-        body: const Center(child: Text('Oops, an unexpected error occured!')),
+        body: Center(child: Text(errorMessage, textAlign: TextAlign.center,)),
     );
   }
 }

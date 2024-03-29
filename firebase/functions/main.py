@@ -25,16 +25,14 @@ def calcParkShading(req: https_fn.Request) -> https_fn.Response:
     time = str(req.data["timeStr"])
     if date is None or time is None:
         return https_fn.Response("One or more datetime parameters are missing", status=400)
-
-    south, west, north, east = (lat - 0.0045), (long - 0.0045), (lat + 0.0045), (long + 0.0045)
     
     # fetch all ways and nodes
     overpass_url = "http://overpass-api.de/api/interpreter"
     query = f"""
         [out:json];
         (
-        way({south}, {west}, {north}, {east}) ["leisure"="park"];
-        way({south}, {west}, {north}, {east}) ["building"];
+        way(around:500, {lat}, {long}) ["leisure"="park"];
+        way(around:500, {lat}, {long}) ["building"];
         );
         (._;>;);
         out geom;
@@ -69,6 +67,9 @@ def calcParkShading(req: https_fn.Request) -> https_fn.Response:
     geojsonDF.loc[geojsonDF['leisure'] == 'park', 'height'] = 0
     parks = geojsonDF.loc[geojsonDF['leisure'] == 'park']
     mass = geojsonDF.loc[geojsonDF['leisure'] != 'park']
+
+    if len(parks) == 0:
+        return {0:"No parks"}
     
     buildings = pybdshadow.bd_preprocess(mass)
     
@@ -85,6 +86,7 @@ def calcParkShading(req: https_fn.Request) -> https_fn.Response:
 
     #Link with park names and return
     parks_tags = parks.tags.apply(pd.Series)
+    print(type(parks_tags.name), type(sunny_perc), type(parks.centroid.get_coordinates()))
     parks_concat = pd.concat([parks_tags.name, sunny_perc, parks.centroid.get_coordinates()], axis=1)
     top3 = parks_concat.sort_values(by=[0], ascending=False).head(5)
     top3 = top3.rename(columns={0:'perc', 'x':'long', 'y':'lat'}).reset_index(drop=True)

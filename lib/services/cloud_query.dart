@@ -39,13 +39,20 @@ Future<Object> getParks() async {
   final formattedDate = dateFormatter.format(datetimeNow);
   final formattedTime = timeFormatter.format(datetimeNow);
 
+  print({
+        "lat": position.latitude,
+        "long": position.longitude,
+        "dateStr": formattedDate,
+        "timeStr": formattedTime, 
+      });
+
   try {
     final result = await FirebaseFunctions.instance.httpsCallable('calcParkShading').call(
       {
         "lat": position.latitude,
         "long": position.longitude,
         "dateStr": formattedDate,
-        "timeStr": '18:00:00', 
+        "timeStr": formattedTime, 
       },
     );
     return result.data;
@@ -53,12 +60,6 @@ Future<Object> getParks() async {
     print(error.code);
     print(error.details);
     print(error.message);
-    print({
-        "lat": position.latitude,
-        "long": position.longitude,
-        "dateStr": formattedDate,
-        "timeStr": '18:00:00', 
-      });
     return 'FunctionError';
   }
 }

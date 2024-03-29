@@ -33,23 +33,29 @@ class _SunFinderState extends State<SunFinder> {
           print(queryResult);
           setState(() => isLoading = false);
           if (!context.mounted) return;
-            if (queryResult is Map<String, dynamic>) {
+            if (queryResult is Map<String, dynamic> && queryResult['0'] != "No parks") {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => HomePage(loaded: true, queryResult : queryResult))
               ); 
             }
+            else if (queryResult['0'] == "No parks") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ErrorPage(errorMessage: 'Error, no parks found in the area. This may be due to our contributors not having the data yet',))
+              ); 
+            }
             else {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ErrorPage())
+                MaterialPageRoute(builder: (context) => const ErrorPage(errorMessage: 'Oops, an unexpected error occured!'))
               ); 
             }
           },
           style: TextButton.styleFrom(
           backgroundColor: Colors.amber[600],
           ), 
-        child: const Text('Find nearest sun'),
+        child: const Text('Find me some sun!'),
       ),
     );
   }
