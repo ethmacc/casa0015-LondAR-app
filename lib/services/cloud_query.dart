@@ -43,7 +43,7 @@ Future<Object> getParks() async {
         "lat": position.latitude,
         "long": position.longitude,
         "dateStr": formattedDate,
-        "timeStr": formattedTime, 
+        "timeStr": '16:00:00', 
       });
 
   try {
@@ -52,7 +52,7 @@ Future<Object> getParks() async {
         "lat": position.latitude,
         "long": position.longitude,
         "dateStr": formattedDate,
-        "timeStr": formattedTime, 
+        "timeStr": '16:00:00', 
       },
     );
     return result.data;

@@ -9,30 +9,21 @@ class ParksList extends StatefulWidget{
 }
 
 class _ParksListState extends State<ParksList> {
-  bool selected = false;
-
+  int selectedindex = 0;
   @override
-  Widget build(BuildContext context) {  
-    return ListView(
+  Widget build(BuildContext context) { 
+    return ListView.builder(
+      itemCount: widget.queryResult.length,
       padding: const EdgeInsets.all(8),
-      children: <Widget>[
-        Container(
-          height: 50,
-          color: Colors.white,
-          child: const Center(child: Text('Top sunniest parks:')),
-        ),
-        for (var row in widget.queryResult.keys)
-          InkWell(
+      itemBuilder: (context, i) {
+        return ListTile(
             onTap: () {
-              setState(() => selected = true);
+              setState(() => selectedindex = i); 
             },
-              child: Ink(
-                height: 50,
-                color: !selected ? Colors.amber[600] : Colors.red, 
-                child: Text('${widget.queryResult[row]['name']} - ${widget.queryResult[row]['perc'].floor()}% sunny', textAlign: TextAlign.center)
-            )
-          )
-      ]
+            tileColor: !(selectedindex == i) ? Colors.amber[600] : Colors.red,
+            title: Text('${widget.queryResult[i.toString()]['name']} - ${widget.queryResult[i.toString()]['perc'].floor()}% sunny', textAlign: TextAlign.center)
+          );
+      }
     );
   }
 }

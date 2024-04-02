@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SunChaser Prototype',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromRGBO(255, 179, 0, 1)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 255, 179, 0)),
         useMaterial3: true,
       ),
       home: const HomePage(loaded: false, queryResult: <String, dynamic>{},),
