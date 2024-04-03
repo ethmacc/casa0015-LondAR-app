@@ -4,7 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 
-Future<Object> getParks() async {
+Future<Object> getParks(dynamic position, TimeOfDay selectedTime) async {
   //Adapted from https://pub.dev/packages/geolocator
   bool serviceEnabled;
   LocationPermission permission;
@@ -28,23 +28,13 @@ Future<Object> getParks() async {
       'Location permissions are permanently denied, we cannot request permissions.');
   } 
 
-  Position position = await Geolocator.getCurrentPosition();
-
   //Adapted from https://www.dhiwise.com/post/understanding-the-importance-of-flutter-get-current-timestamp
   final DateTime datetimeNow = DateTime.now(); 
 
   final dateFormatter = DateFormat('yyyy-MM-dd');
-  final timeFormatter = DateFormat('HH:mm:ss');
 
   final formattedDate = dateFormatter.format(datetimeNow);
-  final formattedTime = timeFormatter.format(datetimeNow);
-
-  print({
-        "lat": position.latitude,
-        "long": position.longitude,
-        "dateStr": formattedDate,
-        "timeStr": '16:00:00', 
-      });
+  final formattedTime = '${selectedTime.hour.toString().padLeft(2, '0')}:${selectedTime.minute.toString().padLeft(2, '0')}:00';
 
   try {
     final result = await FirebaseFunctions.instance.httpsCallable('calcParkShading').call(
@@ -52,7 +42,7 @@ Future<Object> getParks() async {
         "lat": position.latitude,
         "long": position.longitude,
         "dateStr": formattedDate,
-        "timeStr": '16:00:00', 
+        "timeStr": formattedTime, 
       },
     );
     return result.data;

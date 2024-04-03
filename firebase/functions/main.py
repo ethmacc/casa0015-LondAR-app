@@ -79,7 +79,11 @@ def calcParkShading(req: https_fn.Request) -> https_fn.Response:
         .tz_convert('UTC')
     
     #Calculate shadows
-    shadows = pybdshadow.bdshadow_sunlight(buildings,date,roof=True,include_building = False)
+    try:
+        shadows = pybdshadow.bdshadow_sunlight(buildings,date,roof=True,include_building = False)
+    except ValueError:
+        return {0:"After sunset"}
+    
     shadows_all = shadows.geometry.unary_union
     parks_unshaded  = parks.geometry.difference(shadows_all)
     sunny_perc = parks_unshaded.area/parks.area * 100
@@ -93,5 +97,4 @@ def calcParkShading(req: https_fn.Request) -> https_fn.Response:
     top3.name = top3.name.fillna('Unnamed')
     return_dict = top3.to_dict('index')
     
-    print (return_dict)
     return return_dict
