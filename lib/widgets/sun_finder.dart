@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
-import '../services/cloudQuery.dart';
+import '../services/cloud_query.dart';
 import '../screens/home.dart';
 import '../screens/error.dart';
-import '../models/posSetter.dart';
+import '../models/mark_list.dart';
 
 class SunFinder extends StatefulWidget {
   const SunFinder({super.key});
@@ -14,14 +14,18 @@ class SunFinder extends StatefulWidget {
   State<SunFinder> createState() => _SunFinderState();
 }
 
-class _SunFinderState extends State<SunFinder> {
+class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixin {
   bool querySent = false;
   bool isLoading = false;
   late dynamic queryResult;
   TimeOfDay selectedTime = TimeOfDay.now();
 
   @override
+  bool wantKeepAlive = true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
                     color:Colors.white,
                     height:  MediaQuery.of(context).size.height / 2.5,
@@ -30,7 +34,7 @@ class _SunFinderState extends State<SunFinder> {
   }
 
   Widget sunFinderButton() {
-    posSetter _posSetter = Provider.of<posSetter>(context, listen: false);
+    InputMarkList inputMarkList = Provider.of<InputMarkList>(context, listen: false);
 
     return Center(
       child: Column(
@@ -43,8 +47,8 @@ class _SunFinderState extends State<SunFinder> {
           const Text('Tap the map to set a custom location'),
           ElevatedButton(
             onPressed: () {
-              _posSetter.clearMarkers();
-              _posSetter.setAlign(AlignOnUpdate.always);
+              inputMarkList.clearMarkers();
+              inputMarkList.setAlign(AlignOnUpdate.always);
             }, 
             child: const Text('Clear and use current location')
             ),
@@ -70,8 +74,8 @@ class _SunFinderState extends State<SunFinder> {
             onPressed: () async {
               late dynamic position;
               setState(() => isLoading = true);
-              if (_posSetter.marks.isNotEmpty) {
-                position = _posSetter.marks[0].point;
+              if (inputMarkList.marks.isNotEmpty) {
+                position = inputMarkList.marks[0].point;
               } else {
                 position = await Geolocator.getCurrentPosition();
               }

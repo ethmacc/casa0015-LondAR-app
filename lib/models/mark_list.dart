@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 
-class posSetter extends ChangeNotifier {
+class InputMarkList extends ChangeNotifier {
   AlignOnUpdate _alignOnUpdate = AlignOnUpdate.always;
   AlignOnUpdate get aln => _alignOnUpdate;
 

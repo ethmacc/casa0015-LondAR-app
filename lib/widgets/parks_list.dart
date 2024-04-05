@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/IndexSetter.dart';
+import '../models/selected_mark.dart';
 
 class ParksList extends StatefulWidget{
   const ParksList({super.key, required this.queryResult});
@@ -11,21 +11,21 @@ class ParksList extends StatefulWidget{
 }
 
 class _ParksListState extends State<ParksList> {
-  late IndexSetter _indexSetter;
+  late SelectedMark selectedMark;
 
   @override
   void initState() {
     super.initState();
-    _indexSetter = Provider.of<IndexSetter>(context, listen:false);
+    selectedMark = Provider.of<SelectedMark>(context, listen:false);
   }
 
   void updateIndex(int i) {
-    _indexSetter.setIndex(i);
+    selectedMark.setIndex(i);
   }
 
   @override
   Widget build(BuildContext context) { 
-    IndexSetter _indexSetter = Provider.of<IndexSetter>(context);
+    SelectedMark selectedMark = Provider.of<SelectedMark>(context);
     return Column(
       children: <Widget>[
         Container(
@@ -41,7 +41,7 @@ class _ParksListState extends State<ParksList> {
                   onTap: () {
                     setState(() => updateIndex(i)); 
                   },
-                  tileColor: !(_indexSetter.idx == i) ? Colors.amber[600] : Colors.red,
+                  tileColor: !(selectedMark.idx == i) ? Colors.amber[600] : Colors.lightGreen,
                   title: Text('${widget.queryResult[i.toString()]['name']} - ${widget.queryResult[i.toString()]['perc'].floor()}% sunny', textAlign: TextAlign.center)
                 );
             }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class IndexSetter extends ChangeNotifier {
+class SelectedMark extends ChangeNotifier {
   int index = 0;
   int get idx => index;
 

@@ -2,24 +2,26 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:sunchaser2/models/IndexSetter.dart';
-import 'package:sunchaser2/models/posSetter.dart';
+import 'package:sunchaser2/models/exposure_log.dart';
+import 'package:sunchaser2/models/selected_mark.dart';
+import 'package:sunchaser2/models/mark_list.dart';
 import 'firebase_options.dart';
 import 'screens/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
+  await Firebase.initializeApp(  
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
   runApp(
     MultiProvider(
       providers:[
-        ChangeNotifierProvider(create: (context) => IndexSetter()),
-        ChangeNotifierProvider(create: (context) => posSetter())
+        ChangeNotifierProvider(create: (context) => SelectedMark()),
+        ChangeNotifierProvider(create: (context) => InputMarkList()),
+        ChangeNotifierProvider(create: (context) => ExposureLog())
       ],
-      child: MyApp())
+      child: const MyApp())
   );
 }
 
