@@ -27,7 +27,6 @@ class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixi
   Widget build(BuildContext context) {
     super.build(context);
     return Container(
-                    color:Colors.white,
                     height:  MediaQuery.of(context).size.height / 2.5,
                     child: !isLoading ? sunFinderButton() : const Center(child:CircularProgressIndicator())
                     );
@@ -110,6 +109,7 @@ class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixi
               },
               style: ElevatedButton.styleFrom(
               backgroundColor: Colors.amber[600],
+              textStyle: TextStyle(fontWeight: FontWeight.bold)
               ), 
             child: const Text('Find me some sun!'),
           ),

@@ -92,7 +92,7 @@ class _homePageState extends State<HomePage> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            title: const Text('Sunchaser'),
+            title: const Text('SunChaser', style: TextStyle(fontWeight: FontWeight.bold),),
           ),
           body: Column(children: <Widget>[
             SizedBox(
