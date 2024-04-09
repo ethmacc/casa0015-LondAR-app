@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sunchaser2/models/exposure_log.dart';
 import 'package:sunchaser2/models/selected_mark.dart';
 import 'package:sunchaser2/models/mark_list.dart';
+import 'package:sunchaser2/models/weather_models.dart';
 import 'firebase_options.dart';
 import 'screens/home.dart';
 
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 255, 179, 0)),
         useMaterial3: true,
       ),
-      home: const HomePage(loaded: false, queryResult: <String, dynamic>{},),
+      home: const HomePage(loaded: false, queryResult: <String, dynamic>{}, weatherResult: WeatherResponse(clouds: 0)),
     );
   }
 }

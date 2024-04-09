@@ -30,6 +30,7 @@ dependencies:
   provider: ^6.1.2
   light: ^3.0.1
   flutter_native_splash: ^2.3.10
+  http: ^1.2.0
 
 
 dev_dependencies:

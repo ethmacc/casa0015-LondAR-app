@@ -139,3 +139,6 @@ app.*.symbols
 
 # venv
 venv/
+
+#Secret
+/lib/keys.dart

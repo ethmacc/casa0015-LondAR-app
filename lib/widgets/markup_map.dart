@@ -71,7 +71,8 @@ class _MarkupMapState extends State<MarkupMap> with TickerProviderStateMixin {
             point: LatLng(widget.queryResult[row]['lat'], widget.queryResult[row]['long']),
             child: Icon(
               Icons.location_on,
-              color:!(selectedMark.idx == int.parse(row)) ? Colors.amber[700] : Colors.green,
+              shadows: const <Shadow>[Shadow(color: Colors.grey, blurRadius: 15.0)],
+              color:!(selectedMark.idx == int.parse(row)) ? Colors.amberAccent: Colors.amber[800],
               )
             )
     ];
@@ -97,6 +98,7 @@ class _MarkupMapState extends State<MarkupMap> with TickerProviderStateMixin {
                         point: latlng,
                         child: const Icon(
                           Icons.location_on,
+                          shadows: <Shadow>[Shadow(color: Colors.grey, blurRadius: 15.0)],
                           color: Colors.blue,
                           )
                         )

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:light/light.dart';
 import 'package:provider/provider.dart';
+import 'package:sunchaser2/models/weather_models.dart';
 import '../widgets/markup_map.dart';
 import '../widgets/parks_list.dart';
 import '../widgets/sun_finder.dart';
@@ -9,9 +10,10 @@ import '../widgets/exposure_display.dart';
 import '../models/exposure_log.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.loaded, required this.queryResult});
+  const HomePage({super.key, required this.loaded, required this.queryResult, required this.weatherResult});
   final bool loaded;
   final Map<String, dynamic> queryResult;
+  final WeatherResponse weatherResult;
   
   @override
   State<HomePage> createState() => _homePageState();
@@ -116,7 +118,7 @@ class _homePageState extends State<HomePage> {
               Expanded(
                 child: TabBarView(
                   children: [
-                    !widget.loaded ? const SunFinder() : ParksList(queryResult: widget.queryResult,),
+                    !widget.loaded ? const SunFinder() : ParksList(queryResult: widget.queryResult, weatherResult: widget.weatherResult),
                     Container(
                       color: Colors.amber[600],
                       height:  MediaQuery.of(context).size.height / 2.5,

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
-import '../services/cloud_query.dart';
+import 'package:sunchaser2/models/weather_models.dart';
+import '../services/parks_query.dart';
 import '../screens/home.dart';
 import '../screens/error.dart';
 import '../models/mark_list.dart';
+import 'package:sunchaser2/services/weather_query.dart';
 
 class SunFinder extends StatefulWidget {
   const SunFinder({super.key});
@@ -18,6 +20,7 @@ class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixi
   bool querySent = false;
   bool isLoading = false;
   late dynamic queryResult;
+  late dynamic weatherResult;
   TimeOfDay selectedTime = TimeOfDay.now();
 
   @override
@@ -26,7 +29,7 @@ class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixi
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Container(
+    return SizedBox(
                     height:  MediaQuery.of(context).size.height / 2.5,
                     child: !isLoading ? sunFinderButton() : const Center(child:CircularProgressIndicator())
                     );
@@ -58,7 +61,7 @@ class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixi
               final TimeOfDay? timeOfDay = await showTimePicker(
                 context: context, 
                 initialTime: selectedTime,
-                initialEntryMode: TimePickerEntryMode.input,
+                initialEntryMode: TimePickerEntryMode.inputOnly,
                 );
                 if (timeOfDay != null) {
                   setState(() {
@@ -79,6 +82,7 @@ class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixi
                 position = await Geolocator.getCurrentPosition();
               }
               queryResult = await getParks(position, selectedTime);
+              //weatherResult = await getWeather(position);
               setState(() => isLoading = false);
               if (!context.mounted) return;
                 if (queryResult is Map<String, dynamic>) {
@@ -96,7 +100,7 @@ class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixi
                   } else {
                       Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage(loaded: true, queryResult : queryResult))
+                      MaterialPageRoute(builder: (context) => HomePage(loaded: true, queryResult : queryResult, weatherResult:WeatherResponse(clouds: 0)))
                     ); 
                   }
                 }
@@ -109,7 +113,7 @@ class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixi
               },
               style: ElevatedButton.styleFrom(
               backgroundColor: Colors.amber[600],
-              textStyle: TextStyle(fontWeight: FontWeight.bold)
+              textStyle: const TextStyle(fontWeight: FontWeight.bold)
               ), 
             child: const Text('Find me some sun!'),
           ),

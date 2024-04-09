@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sunchaser2/models/weather_models.dart';
 import '../models/selected_mark.dart';
 
 class ParksList extends StatefulWidget{
-  const ParksList({super.key, required this.queryResult});
+  const ParksList({super.key, required this.queryResult, required this.weatherResult});
   final Map<String, dynamic> queryResult;
+  final WeatherResponse weatherResult;
 
   @override
   State<ParksList> createState() => _ParksListState();
@@ -26,6 +28,8 @@ class _ParksListState extends State<ParksList> {
   @override
   Widget build(BuildContext context) { 
     SelectedMark selectedMark = Provider.of<SelectedMark>(context);
+    double clearness = (100 - widget.weatherResult.clouds) / 100;
+
     return Column(
       children: <Widget>[
         Container(
@@ -41,8 +45,8 @@ class _ParksListState extends State<ParksList> {
                   onTap: () {
                     setState(() => updateIndex(i)); 
                   },
-                  tileColor: !(selectedMark.idx == i) ? Colors.amber[600] : Colors.lightGreen,
-                  title: Text('${widget.queryResult[i.toString()]['name']} - ${widget.queryResult[i.toString()]['perc'].floor()}% sunny', textAlign: TextAlign.center)
+                  tileColor: !(selectedMark.idx == i) ? Colors.amberAccent : Colors.amber[600],
+                  title: Text('${widget.queryResult[i.toString()]['name']} - ${(widget.queryResult[i.toString()]['perc'] * clearness).floor()}% sunny', textAlign: TextAlign.center)
                 );
             }
           )
