@@ -2,12 +2,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:light/light.dart';
 import 'package:provider/provider.dart';
+import 'package:sunchaser2/models/selected_mark.dart';
 import 'package:sunchaser2/models/weather_models.dart';
 import '../widgets/markup_map.dart';
 import '../widgets/parks_list.dart';
 import '../widgets/sun_finder.dart';
 import '../widgets/exposure_display.dart';
 import '../models/exposure_log.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.loaded, required this.queryResult, required this.weatherResult});
@@ -19,12 +21,19 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _homePageState();
 }
 
-class _homePageState extends State<HomePage> {
+class _homePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+  late SelectedMark selectedMark;
   int _luxInt = 0;
   Light? _light;
   StreamSubscription? _subscription;
+  StreamSubscription? positionStream;
   Timer? timer;
   late ExposureLog exposureLog;
+  final LocationSettings locationSettings = const LocationSettings(
+    accuracy: LocationAccuracy.high,
+    distanceFilter: 100,
+  );
+  late TabController _tabController;
 
   dynamic show30MinDialog() {
      if (exposureLog.mins == 5) {
@@ -33,16 +42,36 @@ class _homePageState extends State<HomePage> {
           builder: (context) {
             return AlertDialog(
               title: const Text('Daily Target Reached!'),
-              content: const Text("Congratulations, you've spent 30mins in outdoor sunlight today!"),
+              content: const Text("Congratulations, you've spent 5mins in outdoor sunlight today!"),
               actions: [
                 TextButton(onPressed: () {
                   Navigator.pop(context);
-                }, child: const Text('OK'))
+                }, 
+                child: const Text('OK'))
               ]
             );
           }
         );
       }
+  }
+
+  dynamic notifyArrival() {
+    return showDialog(
+      context: context, 
+      builder: (context) {
+        return  AlertDialog(
+          title:  const Text('Destination Reached'),
+          content: const Text("You've arrived at your selected park, please switch tabs to start logging your sun intake"),
+          actions: [
+                TextButton(onPressed: () {
+                  Navigator.pop(context);
+                  _tabController.animateTo(1);
+                }, 
+                child: const Text('OK'))
+              ]
+        );
+      }
+      );
   }
 
   void onData(int luxValue) async {
@@ -60,8 +89,25 @@ class _homePageState extends State<HomePage> {
     }
   }
 
+  void startGeoListening(){
+    if (widget.loaded) {
+      positionStream = Geolocator.getPositionStream(locationSettings: locationSettings).listen(
+      (Position? position) {
+        if (position != null) {
+          if (Geolocator.distanceBetween(
+            position.latitude, position.longitude, 
+            widget.queryResult[selectedMark.idx.toString()]['lat'], widget.queryResult[selectedMark.idx.toString()]['long']) < 100) {
+              positionStream?.cancel();
+              notifyArrival();
+          }
+        }
+      });
+    }
+  }
+
   void stopListening() {
     _subscription?.cancel();
+    positionStream?.cancel();
   }
 
   void logReading(int reading) {
@@ -74,22 +120,26 @@ class _homePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    startListening();
+    selectedMark = Provider.of<SelectedMark>(context, listen:false);
     exposureLog = Provider.of<ExposureLog>(context, listen:false);
+    startListening();
+    startGeoListening();
     timer = Timer.periodic(const Duration(seconds: 5), (Timer t) => logReading(_luxInt));
+    _tabController = TabController(vsync: this, length: 2);
   }
 
   @override
   void dispose() {
+    _tabController.dispose;
     stopListening();
     timer?.cancel();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
-      
-    return DefaultTabController(
+      selectedMark = Provider.of<SelectedMark>(context);
+      return DefaultTabController(
         length: 2,
         child: Scaffold(
           appBar: AppBar(
@@ -101,22 +151,24 @@ class _homePageState extends State<HomePage> {
               height:MediaQuery.of(context).size.height / 2.2,
               child: MarkupMap(loaded: widget.loaded, queryResult: widget.queryResult,)
             ),
-            const PreferredSize(
-              preferredSize: Size.fromHeight(50.0),
+             PreferredSize(
+              preferredSize: const Size.fromHeight(50.0),
               child: TabBar(
+                controller: _tabController,
                 labelColor:Colors.black,
-                tabs: [
+                tabs: const [
                   Tab(
                     text: 'Sun Finder'
                   ),
                   Tab(
-                    text: 'Sun Exposure',
+                    text: 'Sun Intake',
                   )
                 ],
                 )
               ),
               Expanded(
                 child: TabBarView(
+                  controller: _tabController,
                   children: [
                     !widget.loaded ? const SunFinder() : ParksList(queryResult: widget.queryResult, weatherResult: widget.weatherResult),
                     Container(
@@ -126,7 +178,7 @@ class _homePageState extends State<HomePage> {
                       )
                   ],
                   )
-                )
+                )  
           ]
         )
         )

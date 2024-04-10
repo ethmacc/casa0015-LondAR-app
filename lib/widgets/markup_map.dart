@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:sunchaser2/models/route.dart';
 import '../models/selected_mark.dart';
 import 'package:provider/provider.dart';
 import '../models/mark_list.dart';
@@ -17,11 +18,17 @@ class MarkupMap extends StatefulWidget{
 
 class _MarkupMapState extends State<MarkupMap> with TickerProviderStateMixin {
   late MapController _mapController;
+  late RouteModel routeModel;
 
   @override
    void initState() {
      super.initState();
      _mapController = MapController();
+     routeModel = Provider.of<RouteModel>(context, listen: false);
+     WidgetsBinding.instance!.addPostFrameCallback((_) {
+      routeModel.clearPoints();
+     }
+     );
    }
 
   //from animated_map_controller by JaffaKetchup
@@ -63,6 +70,7 @@ class _MarkupMapState extends State<MarkupMap> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     SelectedMark selectedMark = Provider.of<SelectedMark>(context);
     InputMarkList inputMarkList = Provider.of<InputMarkList>(context);
+    RouteModel routeModel = Provider.of<RouteModel>(context);
     late LatLng startPt;
 
     List<Marker> resultMarkers = [
@@ -124,6 +132,14 @@ class _MarkupMapState extends State<MarkupMap> with TickerProviderStateMixin {
                 ),
                 MarkerLayer(
                   markers: inputMarkList.marks + resultMarkers
+                  ),
+                PolylineLayer(polylines: widget.loaded ? [
+                    Polyline(
+                      points: routeModel.pts,
+                      color: Colors.blue,
+                      strokeWidth: 5.0,
+                    ),
+                    ] : []
                   )
               ],
             );
