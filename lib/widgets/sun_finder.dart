@@ -7,7 +7,6 @@ import '../services/parks_query.dart';
 import '../screens/home.dart';
 import '../screens/error.dart';
 import '../models/mark_list.dart';
-import 'package:sunchaser2/services/weather_query.dart';
 
 class SunFinder extends StatefulWidget {
   const SunFinder({super.key});

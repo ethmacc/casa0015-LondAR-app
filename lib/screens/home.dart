@@ -98,6 +98,7 @@ class _homePageState extends State<HomePage> with SingleTickerProviderStateMixin
             position.latitude, position.longitude, 
             widget.queryResult[selectedMark.idx.toString()]['lat'], widget.queryResult[selectedMark.idx.toString()]['long']) < 100) {
               positionStream?.cancel();
+              selectedMark.clearChange();
               notifyArrival();
           }
         }
@@ -107,6 +108,9 @@ class _homePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   void stopListening() {
     _subscription?.cancel();
+  }
+
+  void stopGeoListening() {
     positionStream?.cancel();
   }
 
@@ -122,9 +126,11 @@ class _homePageState extends State<HomePage> with SingleTickerProviderStateMixin
     super.initState();
     selectedMark = Provider.of<SelectedMark>(context, listen:false);
     exposureLog = Provider.of<ExposureLog>(context, listen:false);
-    startListening();
+    if (widget.loaded) {
+      startListening();
+    }
     startGeoListening();
-    timer = Timer.periodic(const Duration(seconds: 5), (Timer t) => logReading(_luxInt));
+    timer = Timer.periodic(const Duration(seconds: 10), (Timer t) => logReading(_luxInt));
     _tabController = TabController(vsync: this, length: 2);
   }
 
@@ -132,13 +138,18 @@ class _homePageState extends State<HomePage> with SingleTickerProviderStateMixin
   void dispose() {
     _tabController.dispose;
     stopListening();
+    stopGeoListening();
     timer?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-      selectedMark = Provider.of<SelectedMark>(context);
+      selectedMark = Provider.of<SelectedMark>(context, listen:true);
+      if (selectedMark.isChanged) {
+        stopGeoListening();
+        startGeoListening();
+      }
       return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -174,7 +185,7 @@ class _homePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     Container(
                       color: Colors.amber[600],
                       height:  MediaQuery.of(context).size.height / 2.5,
-                      child: ExposureDisplay(luxInt: _luxInt),
+                      child: ExposureDisplay(luxInt: _luxInt, loaded:widget.loaded),
                       )
                   ],
                   )
