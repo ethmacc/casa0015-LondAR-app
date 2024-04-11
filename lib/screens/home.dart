@@ -5,11 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:sunchaser2/models/selected_mark.dart';
 import 'package:sunchaser2/models/weather_models.dart';
 import 'package:sunchaser2/screens/error.dart';
-import '../widgets/markup_map.dart';
-import '../widgets/parks_list.dart';
-import '../widgets/sun_finder.dart';
-import '../widgets/exposure_display.dart';
-import '../models/exposure_log.dart';
+import 'package:sunchaser2/widgets/markup_map.dart';
+import 'package:sunchaser2/widgets/parks_list.dart';
+import 'package:sunchaser2/widgets/sun_finder.dart';
+import 'package:sunchaser2/widgets/exposure_display.dart';
+import 'package:sunchaser2/models/exposure_log.dart';
 import 'package:geolocator/geolocator.dart';
 
 class HomePage extends StatefulWidget {

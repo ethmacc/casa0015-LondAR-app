@@ -3,10 +3,10 @@ import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:sunchaser2/services/weather_query.dart';
-import '../services/parks_query.dart';
-import '../screens/home.dart';
-import '../screens/error.dart';
-import '../models/mark_list.dart';
+import 'package:sunchaser2/services/parks_query.dart';
+import 'package:sunchaser2/screens/home.dart';
+import 'package:sunchaser2/screens/error.dart';
+import 'package:sunchaser2/models/mark_list.dart';
 
 class SunFinder extends StatefulWidget {
   const SunFinder({super.key});

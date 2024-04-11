@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sunchaser2/models/mark_list.dart';
 import 'package:sunchaser2/models/route.dart';
 import 'package:sunchaser2/models/weather_models.dart';
-import '../models/selected_mark.dart';
+import 'package:sunchaser2/models/selected_mark.dart';
 import 'package:osrm/osrm.dart';
 
 class ParksList extends StatefulWidget{
