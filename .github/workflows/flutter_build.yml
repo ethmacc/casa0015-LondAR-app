@@ -21,7 +21,6 @@ jobs:
         with:
           java-version: '11'
           distribution: microsoft
-          apiKey: ${{ secrets.OPEN_WEA }}
 
       #  Decode keystore File from repository secrets
       #  Keep the keystore file private; don’t check it into public source control!
@@ -55,6 +54,8 @@ jobs:
 
       - name: Build APK Release             # Build a release
         run: flutter build apk --release
+        env:
+          apiKey: ${{ secrets.OPEN_WEA }}
 
       - name: Build an AppBundle            # App Bundles are useful for Google Play Store
         run: flutter build appbundle --release
