@@ -13,7 +13,9 @@ from firebase_admin import initialize_app
 pd.options.mode.chained_assignment = None #suppress SettingWithCopyWarning
 initialize_app()
 
-@https_fn.on_call()
+@https_fn.on_call(
+    enforce_app_check=True  # Reject requests with missing or invalid App Check tokens.
+)
 def calcParkShading(req: https_fn.Request) -> https_fn.Response:
     """Take the coordinate and datetime values passed to this parameter and return a list of the top 3 sunniest parks within  a box of approx 1km by 1km"""
     #query = json.loads(req.data)
