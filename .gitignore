@@ -141,4 +141,4 @@ app.*.symbols
 venv/
 
 #Secret
-/lib/keys.dart
+*.env

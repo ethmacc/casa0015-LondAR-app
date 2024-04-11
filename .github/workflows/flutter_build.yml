@@ -51,11 +51,15 @@ jobs:
 
       - name: Get Flutter dependencies      # Get the Libraries and Dependencies
         run: flutter pub get
+      
+      - name: Create .env file
+        run: |
+          cat > assets/.env
+          API_KEY = ${{ secrets.OPEN_WEA }}
+          EOF
 
       - name: Build APK Release             # Build a release
         run: flutter build apk --release
-        env:
-          apiKey: ${{ secrets.OPEN_WEA }}
 
       - name: Build an AppBundle            # App Bundles are useful for Google Play Store
         run: flutter build appbundle --release

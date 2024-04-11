@@ -1,6 +1,7 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:sunchaser2/models/exposure_log.dart';
 import 'package:sunchaser2/models/route.dart';
@@ -16,6 +17,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
+  await dotenv.load(fileName: "assets/.env");
   runApp(
     MultiProvider(
       providers:[
