@@ -25,7 +25,7 @@ class _MarkupMapState extends State<MarkupMap> with TickerProviderStateMixin {
      super.initState();
      _mapController = MapController();
      routeModel = Provider.of<RouteModel>(context, listen: false);
-     WidgetsBinding.instance!.addPostFrameCallback((_) {
+     WidgetsBinding.instance.addPostFrameCallback((_) {
       routeModel.clearPoints();
      }
      );

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
-import 'package:sunchaser2/models/weather_models.dart';
 import 'package:sunchaser2/services/weather_query.dart';
 import '../services/parks_query.dart';
 import '../screens/home.dart';
