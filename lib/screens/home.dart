@@ -4,6 +4,7 @@ import 'package:light/light.dart';
 import 'package:provider/provider.dart';
 import 'package:sunchaser2/models/selected_mark.dart';
 import 'package:sunchaser2/models/weather_models.dart';
+import 'package:sunchaser2/screens/error.dart';
 import '../widgets/markup_map.dart';
 import '../widgets/parks_list.dart';
 import '../widgets/sun_finder.dart';
@@ -84,8 +85,11 @@ class _homePageState extends State<HomePage> with SingleTickerProviderStateMixin
     _light = Light();
     try {
       _subscription = _light?.lightSensorStream.listen(onData);
-    } on LightException catch (exception) {
-      print(exception);
+    } on LightException {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ErrorPage(errorMessage: 'Error, light sensor missing or not reachable'))
+      ); 
     }
   }
 

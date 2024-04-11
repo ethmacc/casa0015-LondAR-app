@@ -11,7 +11,24 @@ class ErrorPage extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: const Text('Sunchaser'),
         ),
-        body: Center(child: Text(errorMessage, textAlign: TextAlign.center,)),
+        body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.error,
+                  color: Color.fromRGBO(255, 179, 0, 1),
+                  size: 100,
+                ),
+                const SizedBox(height: 25),
+                Text(
+                  errorMessage, 
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 15),
+                  )
+              ],
+            ),
+          ),
     );
   }
 }

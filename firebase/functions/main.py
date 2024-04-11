@@ -10,6 +10,7 @@ import numpy as np
 from firebase_functions import https_fn
 from firebase_admin import initialize_app
 
+pd.options.mode.chained_assignment = None #suppress SettingWithCopyWarning
 initialize_app()
 
 @https_fn.on_call()

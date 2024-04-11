@@ -46,10 +46,7 @@ Future<Object> getParks(dynamic position, TimeOfDay selectedTime) async {
       },
     );
     return result.data;
-  } on FirebaseFunctionsException catch (error) {
-    print(error.code);
-    print(error.details);
-    print(error.message);
+  } on FirebaseFunctionsException {
     return 'FunctionError';
   }
 }

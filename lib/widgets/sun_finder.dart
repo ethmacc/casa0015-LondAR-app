@@ -3,6 +3,7 @@ import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:sunchaser2/models/weather_models.dart';
+import 'package:sunchaser2/services/weather_query.dart';
 import '../services/parks_query.dart';
 import '../screens/home.dart';
 import '../screens/error.dart';
@@ -81,7 +82,7 @@ class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixi
                 position = await Geolocator.getCurrentPosition();
               }
               queryResult = await getParks(position, selectedTime);
-              //weatherResult = await getWeather(position);
+              weatherResult = await getWeather(position);
               setState(() => isLoading = false);
               if (!context.mounted) return;
                 if (queryResult is Map<String, dynamic>) {
@@ -99,7 +100,7 @@ class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixi
                   } else {
                       Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage(loaded: true, queryResult : queryResult, weatherResult:WeatherResponse(clouds: 0)))
+                      MaterialPageRoute(builder: (context) => HomePage(loaded: true, queryResult : queryResult, weatherResult:weatherResult))
                     ); 
                   }
                 }
