@@ -21,7 +21,7 @@ class ExposureDisplay extends StatelessWidget {
           const Text('Current light level (lux): '),
           const SizedBox(height: 10),
           loaded ? Text('$luxInt', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 60)) : 
-          const Text('Logging starts when sun finder is activated', style: const TextStyle(fontWeight: FontWeight.bold)),
+          const Text('Logging starts when sun finder is activated', style: TextStyle(fontWeight: FontWeight.bold)),
         ],
         )
     );

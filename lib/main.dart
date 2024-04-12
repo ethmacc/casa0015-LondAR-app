@@ -10,6 +10,7 @@ import 'package:sunchaser2/models/weather_models.dart';
 import 'firebase_options.dart';
 import 'screens/home.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:flutter/foundation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +18,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseAppCheck.instance.activate(
-    androidProvider: AndroidProvider.debug,
+    androidProvider: kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
   );
   await dotenv.load(fileName: "assets/.env");
   runApp(
