@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyC2zvCSzRHS15ibc-3kc9SgBy0LxWtT3gM',
-    appId: '1:70535139840:android:969ebba6b066d5169f7ee5',
+    appId: '1:70535139840:android:fb30fe25ac8a96d19f7ee5',
     messagingSenderId: '70535139840',
     projectId: 'sunchaser-13954',
     storageBucket: 'sunchaser-13954.appspot.com',
