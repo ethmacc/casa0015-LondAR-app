@@ -2,6 +2,8 @@
 
 This repository contains the code and associated project documentation for the SunChaser mobile application. SunChaser is a handy app that tells you where is the best park close to you to get some sunshine. It utilizes sun positioning algorithms, combined with local weather data and an approximation of building heights in the city to give users the best guess of where the sunniest parks are.
 
+This mobile application was created as part of the course CASA0015 Mobile Systems and Interactions
+
 ## Concept & Development
 
 The initial concept was sketched out on paper as a simple storyboard:
@@ -31,6 +33,9 @@ The key features are as follows:
 The demo video can be found below:
 
 https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/a0718f42-89c5-48f3-8bed-679e222dd127
+
+## Dependencies
+Dependencies are listed in the ```pubspec.yaml``` file in the root folder. Dependencies for the python backend function can be found in ```firebase/requirements.txt```
 
 ## Installation
 
