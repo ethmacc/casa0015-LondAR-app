@@ -16,11 +16,11 @@ This was then developed into a more fleshed out Figma wireframe:
 
 User personas were also developed to assist in understanding user's needs and aspirations:
 
-<img height="500" alt="persona1" src="https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/756d1ebb-a81d-4a12-82cb-b56186ecc7d3">
+<img width="500" alt="persona1" src="https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/756d1ebb-a81d-4a12-82cb-b56186ecc7d3">
 
-<img height="500" alt="persona2" src="https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/c6a959f9-9b17-48e9-89ab-3ab03d8daff5">
+<img width="500" alt="persona2" src="https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/c6a959f9-9b17-48e9-89ab-3ab03d8daff5">
 
-<img height="500" alt="persona3" src="https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/54d846a8-0e83-426b-9cec-ef0e01094ab6">
+<img width="500" alt="persona3" src="https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/54d846a8-0e83-426b-9cec-ef0e01094ab6">
 
 ## Key features
 
