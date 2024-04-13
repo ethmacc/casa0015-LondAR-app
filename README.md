@@ -12,8 +12,6 @@ This was then developed into a more fleshed out Figma wireframe:
 
 ![Mobile Wireframe UI Kit (Community)](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/24ca1a8f-61cb-4fb7-9977-5e84c67b5fdf)
 
-*Sun and running man icons were sourced from the Noun Project (https://thenounproject.com/)
-
 User personas were also developed to assist in understanding user's needs and aspirations:
 
 <img width="500" alt="persona1" src="https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/756d1ebb-a81d-4a12-82cb-b56186ecc7d3">
@@ -55,4 +53,6 @@ Development version:
 
 If you'd like to contribute to the app, please contact me via GitHub.
 
-## License
+## Credits / References
+- Sun and running man icons in the wireframe were sourced from the Noun Project (https://thenounproject.com/)
+- Adobe Firefly, an AI Diffuser image model was used to create the app icons used in the final prototype and demo video
