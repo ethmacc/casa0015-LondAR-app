@@ -6,7 +6,7 @@ This repository contains the code and associated project documentation for the S
 
 The initial concept was sketched out on paper as a simple storyboard:
 
-![scan0069](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/97da23a4-e51b-45ef-8e2a-7ab5795c61c7)
+<img width="500" alt="storyboard" src="https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/97da23a4-e51b-45ef-8e2a-7ab5795c61c7">
 
 This was then developed into a more fleshed out Figma wireframe:
 
