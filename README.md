@@ -35,7 +35,7 @@ The demo video can be found below:
 https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/a0718f42-89c5-48f3-8bed-679e222dd127
 
 ## Dependencies
-Dependencies are listed in the ```pubspec.yaml``` file in the root folder. Dependencies for the python backend function can be found in ```firebase/requirements.txt```
+Dependencies are listed in the ```pubspec.yaml``` file in the root folder. Dependencies for the python backend function can be found in ```firebase/functions/requirements.txt```, and can be installed as part of the process of setting up firebase Cloud Functions (https://firebase.google.com/docs/functions/get-started?gen=2nd).
 
 ## Installation
 
