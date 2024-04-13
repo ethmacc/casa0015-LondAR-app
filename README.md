@@ -42,7 +42,7 @@ Release versions:
 Development version:
 - If you would like to run the app in flutter, clone this repository to your machine and install flutter (https://flutter-ko.dev/get-started/install) if you don't already have the SDK.
 - Change directory to the repo folder and run ```flutter create . ``` to repair the folder and add any missing files. You will need to add a ```.env``` file to the ```assets``` folder and provide your own API key for Open Weather. Presently, the curent version of the app uses the free-tier API key
-- The backend code is available in the ```firebase``` folder. To get this running, you will need to set up an account with firebase (https://firebase.google.com/) and deploy the folder using Cloud Functions. The app cannot function without the backend.
+- The backend code is available in the ```firebase``` folder. To get this running, you will need to set up an account with firebase (https://firebase.google.com/) and deploy the folder using Cloud Functions (https://firebase.google.com/docs/functions). The app cannot function without the backend.
 
 ## Future implementations
 
@@ -53,6 +53,6 @@ Development version:
 
 ##  Contact Details
 
-If you'd like to contribute to the app, you can contact me via GitHub.
+If you'd like to contribute to the app, please contact me via GitHub.
 
 ## License
