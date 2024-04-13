@@ -1,6 +1,6 @@
 # SunChaser
 
-This repository contains the code and associated project documentation for the SunChaser mobile application. SunChaser is a handy app that tells you where is the best spot in a city to get some sunshine. It utilizes sun positioning algorithms, combined with local weather data and an approximation of building heights to give users the best guess of where the suniest spots of the city are.
+This repository contains the code and associated project documentation for the SunChaser mobile application. SunChaser is a handy app that tells you where is the best park close to you to get some sunshine. It utilizes sun positioning algorithms, combined with local weather data and an approximation of building heights in the city to give users the best guess of where the sunniest parks are.
 
 ## Concept & Development
 
@@ -10,36 +10,49 @@ The initial concept was sketched out on paper as a simple storyboard:
 
 This was then developed into a more fleshed out Figma wireframe:
 
-![Mobile Wireframe UI Kit (Community)](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/c183c53b-f3ae-4a65-a7dc-910b79f33eb5)
+![Mobile Wireframe UI Kit (Community)](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/24ca1a8f-61cb-4fb7-9977-5e84c67b5fdf)
 
 *Sun and running man icons were sourced from the Noun Project (https://thenounproject.com/)
 
 User personas were also developed to assist in understanding user's needs and aspirations:
 
-![Slide6](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/756d1ebb-a81d-4a12-82cb-b56186ecc7d3)
+<img height="500" alt="persona1" src="https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/756d1ebb-a81d-4a12-82cb-b56186ecc7d3">
 
-![Slide7](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/c6a959f9-9b17-48e9-89ab-3ab03d8daff5)
+<img height="500" alt="persona2" src="https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/c6a959f9-9b17-48e9-89ab-3ab03d8daff5">
 
-![Slide8](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/54d846a8-0e83-426b-9cec-ef0e01094ab6)
+<img height="500" alt="persona3" src="https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/54d846a8-0e83-426b-9cec-ef0e01094ab6">
 
 ## Key features
 
 The key features are as follows:
-- A map API to show users their current location (location services must be enabled)
-- A filter function to show:
-  -  Approximate heights of buildings and highlight built-up areas
-  -  Local weather patterns
-  -  Sun vectors throughout the day
--  A routing function to show the way to the nearest sunny spots
--  A solar bracelet / heliodon function to show the current sun position relative to the user
+- A map provided by OpenStreetMap to show users their current location (location services must be enabled)
+- A sun finder function to help users find the top 5 sunniest parks closest to them (or a specified location)
+- A routing function to show the way to these top 5 parks
+- A sun intake counter to count the number of minutes the user spends in outdoor sunlight
 
+The demo video can be found below:
+
+https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/a0718f42-89c5-48f3-8bed-679e222dd127
 
 ## Installation
 
-Include a section that gives intructions on how to install the app or run it in Flutter.  What versions of the plugins are you assuming?  Maybe define a licence
+Release versions:
+- For release versions, simply download and install the .apk file to your Android device.
+
+Development version:
+- If you would like to run the app in flutter, clone this repository to your machine and install flutter (https://flutter-ko.dev/get-started/install) if you don't already have the SDK.
+- Change directory to the repo folder and run ```flutter create . ``` to repair the folder and add any missing files. You will need to add a ```.env``` file to the ```assets``` folder and provide your own API key for Open Weather. Presently, the curent version of the app uses the free-tier API key
+- The backend code is available in the ```firebase``` folder. To get this running, you will need to set up an account with firebase (https://firebase.google.com/) and deploy the folder using Cloud Functions. The app cannot function without the backend.
+
+## Future implementations
+
+- Implement the settings menu toggle as shown in the wireframe
+- Swap out the OSM services with a more reliable paid service, e.g. Google for the production version
+- Provide a heliodon / solar bracelet visualization
+- Implement user accounts and sun log saving for each user
 
 ##  Contact Details
 
-Having Contact Details is also good as it shows people how to get in contact with you if they'd like to contribute to the app. 
+If you'd like to contribute to the app, you can contact me via GitHub.
 
 ## License
