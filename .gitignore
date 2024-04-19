@@ -142,4 +142,3 @@ venv/
 
 #Secret
 *.env
-lib/firebase_options.dart

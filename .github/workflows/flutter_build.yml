@@ -2,9 +2,9 @@ name: Flutter Build and Upload Android APK
 
 on:
   push:                 # This is the condition that the action will run on
-    #branches: [ main ]  # In this case when you push your code into GitHub
-    tags:
-    - "v*.*.*"          # In this case when you tag your commit with v1.0.0 for example
+    branches: [ main ]  # In this case when you push your code into GitHub
+    #tags:
+    #- "v*.*.*"          # In this case when you tag your commit with v1.0.0 for example
 
 jobs:
   build:
@@ -56,6 +56,8 @@ jobs:
         run: |
           cat > assets/.env <<EOF
           API_KEY = ${{ secrets.OPEN_WEA }}
+          android_KEY = ${{ secrets.ANDROID_KEY }}
+          ios_KEY = ${{ secrets.IOS_KEY }}
           EOF
 
       - name: Build APK Release             # Build a release

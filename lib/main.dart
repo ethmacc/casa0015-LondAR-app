@@ -13,6 +13,7 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/foundation.dart';
 
 void main() async {
+  await dotenv.load(fileName: "assets/.env");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(  
     options: DefaultFirebaseOptions.currentPlatform,
@@ -20,7 +21,6 @@ void main() async {
   await FirebaseAppCheck.instance.activate(
     androidProvider: kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
   );
-  await dotenv.load(fileName: "assets/.env");
   runApp(
     MultiProvider(
       providers:[
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SunChaser',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 255, 179, 0), brightness: Brightness.light),
         useMaterial3: true,
       ),
       home: const HomePage(loaded: false, queryResult: <String, dynamic>{}, weatherResult: WeatherResponse(clouds: 0)),
