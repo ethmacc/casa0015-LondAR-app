@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:light/light.dart';
 import 'package:provider/provider.dart';
 import 'package:sunchaser2/models/selected_mark.dart';
@@ -11,6 +12,7 @@ import 'package:sunchaser2/widgets/sun_finder.dart';
 import 'package:sunchaser2/widgets/exposure_display.dart';
 import 'package:sunchaser2/models/exposure_log.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:confetti/confetti.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.loaded, required this.queryResult, required this.weatherResult});
@@ -23,6 +25,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _homePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+  late ConfettiController _controllerCenter;
   late SelectedMark selectedMark;
   int _luxInt = 0;
   Light? _light;
@@ -38,6 +41,7 @@ class _homePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   dynamic show30MinDialog() {
      if (exposureLog.mins == 5) {
+        _controllerCenter.play();
         return showDialog(
           context: context, 
           builder: (context) {
@@ -128,6 +132,7 @@ class _homePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   void initState() {
     super.initState();
+    _controllerCenter = ConfettiController(duration: const Duration(seconds: 5));
     selectedMark = Provider.of<SelectedMark>(context, listen:false);
     exposureLog = Provider.of<ExposureLog>(context, listen:false);
     if (widget.loaded) {
@@ -140,6 +145,7 @@ class _homePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   @override
   void dispose() {
+    _controllerCenter.dispose();
     _tabController.dispose;
     stopListening();
     stopGeoListening();
@@ -154,7 +160,10 @@ class _homePageState extends State<HomePage> with SingleTickerProviderStateMixin
         stopGeoListening();
         startGeoListening();
       }
-      return DefaultTabController(
+      return Stack(
+      alignment: Alignment.center,
+      children: [
+        DefaultTabController(
         length: 2,
         child: Scaffold(
           appBar: AppBar(
@@ -197,6 +206,16 @@ class _homePageState extends State<HomePage> with SingleTickerProviderStateMixin
           ]
         )
         )
+      ),
+      Align(
+            alignment: Alignment.center,
+            child: ConfettiWidget(
+              confettiController: _controllerCenter,
+              blastDirectionality: BlastDirectionality.explosive,
+              shouldLoop: false,  
+            ),
+          ),
+      ]
       );
   }
 }

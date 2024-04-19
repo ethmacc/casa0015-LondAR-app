@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
+import 'package:sunchaser2/models/map_lock.dart';
 import 'package:sunchaser2/services/weather_query.dart';
 import 'package:sunchaser2/services/parks_query.dart';
 import 'package:sunchaser2/screens/home.dart';
@@ -36,6 +37,7 @@ class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixi
 
   Widget sunFinderButton() {
     InputMarkList inputMarkList = Provider.of<InputMarkList>(context, listen: false);
+    MapLock mapLock = Provider.of<MapLock>(context);
 
     return Center(
       child: Column(
@@ -75,6 +77,7 @@ class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixi
             onPressed: () async {
               late dynamic position;
               setState(() => isLoading = true);
+              setState(() => mapLock.Lock());
               if (inputMarkList.marks.isNotEmpty) {
                 position = inputMarkList.marks[0].point;
               } else {
@@ -83,6 +86,7 @@ class _SunFinderState extends State<SunFinder> with AutomaticKeepAliveClientMixi
               queryResult = await getParks(position, selectedTime);
               weatherResult = await getWeather(position);
               setState(() => isLoading = false);
+              setState(() => mapLock.Unlock());
               if (!context.mounted) return;
                 if (queryResult is Map<String, dynamic>) {
                   if (queryResult['0'] == "No parks") {

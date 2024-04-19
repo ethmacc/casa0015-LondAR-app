@@ -1,7 +1,7 @@
 name: sunchaser2
 description: "A flutter app that finds sunny parks"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 2.0.9
+version: 2.0.10
 
 environment:
   sdk: '>=3.2.5 <4.0.0'
@@ -34,6 +34,7 @@ dependencies:
   osrm: ^0.0.5
   flutter_dotenv: ^5.1.0
   firebase_app_check: ^0.2.1+17
+  confetti: ^0.7.0
 
 
 dev_dependencies:

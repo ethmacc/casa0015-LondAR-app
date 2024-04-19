@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:sunchaser2/models/map_lock.dart';
 import 'package:sunchaser2/models/route.dart';
 import 'package:sunchaser2/models/selected_mark.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,7 @@ class _MarkupMapState extends State<MarkupMap> with TickerProviderStateMixin {
      );
    }
 
-  //from animated_map_controller by JaffaKetchup
+  //from animated_map_controller by JaffaKetchup on GitHub
   void _animatedMapMove(LatLng destLocation, double destZoom) {
     // Create some tweens. These serve to split up the transition from one location to another.
     // In our case, we want to split the transition be<tween> our current map center and the destination.
@@ -71,6 +72,7 @@ class _MarkupMapState extends State<MarkupMap> with TickerProviderStateMixin {
     SelectedMark selectedMark = Provider.of<SelectedMark>(context);
     InputMarkList inputMarkList = Provider.of<InputMarkList>(context);
     RouteModel routeModel = Provider.of<RouteModel>(context);
+    MapLock mapLock = Provider.of<MapLock>(context);
     late LatLng startPt;
 
     List<Marker> resultMarkers = [
@@ -97,7 +99,7 @@ class _MarkupMapState extends State<MarkupMap> with TickerProviderStateMixin {
                 maxZoom: 18,
                 initialZoom: 14.5,
                 initialCenter: startPt,
-                onTap: !widget.loaded ? (tapPos, latlng) {
+                onTap: (!widget.loaded && !mapLock.isLocked) ? (tapPos, latlng) {
                   setState(() {
                     inputMarkList.setAlign(AlignOnUpdate.never);
                     inputMarkList.clearMarkers();

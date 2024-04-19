@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:sunchaser2/models/exposure_log.dart';
+import 'package:sunchaser2/models/map_lock.dart';
 import 'package:sunchaser2/models/route.dart';
 import 'package:sunchaser2/models/selected_mark.dart';
 import 'package:sunchaser2/models/mark_list.dart';
@@ -27,7 +28,8 @@ void main() async {
         ChangeNotifierProvider(create: (context) => SelectedMark()),
         ChangeNotifierProvider(create: (context) => InputMarkList()),
         ChangeNotifierProvider(create: (context) => ExposureLog()),
-        ChangeNotifierProvider(create: (context) => RouteModel())
+        ChangeNotifierProvider(create: (context) => RouteModel()),
+        ChangeNotifierProvider(create: (context) => MapLock())
       ],
       child: const MyApp())
   );
