@@ -48,7 +48,7 @@ Development version:
   - Within ```.env``` the variable should be named as such: ```API_KEY = YOUR_API_KEY```
   - Presently, the curent version of the app uses the free-tier API key.
 - The backend code is available in the ```firebase``` folder. To get this running, you will need to set up an account with firebase (https://firebase.google.com/) and deploy the folder using Cloud Functions (https://firebase.google.com/docs/functions). The app cannot function without the backend.
-- Once you have the firebase CLI, you can regenerate the ```firebase_options.dart``` config file in ```lib```
+- Once you have the firebase CLI, you can regenerate the ```firebase_options.dart``` config file in ```lib``` and following the instructions, you should be able to set up your own API keys to connect to firebase.
 
 ## Future implementations
 
