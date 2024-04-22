@@ -32,7 +32,7 @@ The key features are as follows:
 
 The demo video can be found below:
 
-https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/a0718f42-89c5-48f3-8bed-679e222dd127
+https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/0bf1a27f-bb0c-4111-aec5-3fdb5d72be8a
 
 ## Dependencies
 Dependencies are listed in the ```pubspec.yaml``` file in the root folder. Dependencies for the python backend function can be found in ```firebase/functions/requirements.txt```, and can be installed as part of the process of setting up firebase Cloud Functions (https://firebase.google.com/docs/functions/get-started?gen=2nd).
@@ -59,7 +59,7 @@ Development version:
 
 ##  Contact Details
 
-If you'd like to contribute to the app, please contact me via GitHub.
+If you'd like to contribute to the app, please contact me via LinkedIn (https://www.linkedin.com/in/ethan-low-215383134/).
 
 ## Credits / References
 - Sun and running man icons in the wireframe were sourced from the Noun Project (https://thenounproject.com/)
