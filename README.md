@@ -22,6 +22,8 @@ User personas were also developed to assist in understanding user's needs and as
 
 <img width="500" alt="persona3" src="https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/54d846a8-0e83-426b-9cec-ef0e01094ab6">
 
+The app is primaily targetted at students and working professionals looking for parks to enjoy the sun in.
+
 ## Key features
 
 The key features are as follows:
