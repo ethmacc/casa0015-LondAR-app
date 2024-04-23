@@ -69,3 +69,4 @@ If you'd like to contribute to the app, please contact me via LinkedIn (https://
 ## Credits / References
 - Sun and running man icons in the wireframe were sourced from the Noun Project (https://thenounproject.com/)
 - Adobe Firefly, an AI Diffuser image model was used to create the app icons used in the final prototype and demo video
+- Other apps which inspired this project include Pflotsh Sun and City Mapper
