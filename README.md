@@ -32,6 +32,8 @@ The key features are as follows:
 - A routing function to show the way to these top 5 parks
 - A sun intake counter to count the number of minutes the user spends in outdoor sunlight
 
+![sunchaser_final_presentation](https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/4b7fbd3d-5eb6-4d27-9e30-bc091c07c3fb)
+
 The demo video can be found below:
 
 https://github.com/ethmacc/casa0015-sunchaser/assets/60006290/0bf1a27f-bb0c-4111-aec5-3fdb5d72be8a
